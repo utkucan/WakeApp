@@ -2,13 +2,17 @@ package com.wakeapp.wakeapp;
 
 import android.app.Activity;
 import android.app.AlarmManager;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.NotificationCompat;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -24,6 +28,7 @@ public class MainActivity extends Activity {
         TextView textAlarmPrompt;
         TimePickerDialog timePickerDialog;
 
+    int numMessages = 0;
         final static int RQS_1 = 1;
 
         @Override
@@ -33,7 +38,7 @@ public class MainActivity extends Activity {
 
             textAlarmPrompt = (TextView) findViewById(R.id.alarmprompt);
 
-            buttonstartSetDialog = (Button) findViewById(R.id.startAlaram);
+            buttonstartSetDialog = (Button) findViewById(R.id.startAlarm);
             buttonstartSetDialog.setOnClickListener(new View.OnClickListener() {
 
                 @Override
@@ -93,4 +98,10 @@ public class MainActivity extends Activity {
                     pendingIntent);
 
         }
+    public void showNot(){
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this);
+        mBuilder.setContentTitle("Notification Alert, Click Me!");
+        mBuilder.setContentText("Hi, This is Android Notification Detail!");
+    }
+
     }
