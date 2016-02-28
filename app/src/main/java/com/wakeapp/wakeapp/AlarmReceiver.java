@@ -13,7 +13,8 @@ import android.util.Log;
 import android.widget.Toast;
 
 public class AlarmReceiver extends BroadcastReceiver {
-int numMessages = 0;
+    int numMessages = 0;
+
     @Override
     public void onReceive(Context k1, Intent k2) {
         // TODO Auto-generated method stub
@@ -21,19 +22,20 @@ int numMessages = 0;
         displayNotification(k1, k2);
 
     }
+
     protected void displayNotification(Context k1, Intent k2) {
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(k1);
         NotificationManager mNotificationManager = (NotificationManager) k1.getSystemService(Context.NOTIFICATION_SERVICE);
 
 // notificationID allows you to update the notification later on.
-        mNotificationManager.notify(1, mBuilder.build());
+//        mNotificationManager.notify(1, mBuilder.build());
         Log.i("Start", "notification");
 
 
         mBuilder.setContentTitle("New Message");
         mBuilder.setContentText("You've received new message.");
         mBuilder.setTicker("New Message Alert!");
-
+        mBuilder.setSmallIcon(R.drawable.smallicon);
    /* Increase notification number every time a new notification arrives */
         mBuilder.setNumber(++numMessages);
 
@@ -52,7 +54,7 @@ int numMessages = 0;
         inboxStyle.setBigContentTitle("Big Title Details:");
 
         // Moves events into the big view
-        for (int i=0; i < events.length; i++) {
+        for (int i = 0; i < events.length; i++) {
             inboxStyle.addLine(events[i]);
         }
 
@@ -66,10 +68,10 @@ int numMessages = 0;
 
    /* Adds the Intent that starts the Activity to the top of the stack */
         stackBuilder.addNextIntent(resultIntent);
-        PendingIntent resultPendingIntent =stackBuilder.getPendingIntent(0,PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
 
         mBuilder.setContentIntent(resultPendingIntent);
-        mNotificationManager = (NotificationManager) k1.getSystemService(Context.NOTIFICATION_SERVICE);
+//        mNotificationManager = (NotificationManager) k1.getSystemService(Context.NOTIFICATION_SERVICE);
 
    /* notificationID allows you to update the notification later on. */
         mNotificationManager.notify(1, mBuilder.build());
